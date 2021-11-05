@@ -1,10 +1,12 @@
 import plotly.graph_objects as go
 from plotly import io
 from lumi import get_lumi_series
+import kaleido
 
 import pandas as pd
 from datetime import datetime
 import pytz
+
 
 def convert(t):
     tz = pytz.timezone('Asia/Bangkok')
@@ -20,8 +22,10 @@ def plot():
                 open=df['o'],
                 high=df['h'],
                 low=df['l'],
-                close=df['c'])])
+                close=df['c'])], 
+                layout=go.Layout(title=go.layout.Title(text="LUMI Chart")))
 
+    fig.update_layout(xaxis_rangeslider_visible=False)
     png = io.to_image(fig)
     return png
 
