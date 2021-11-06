@@ -24,8 +24,7 @@ def get_lumi_series():
         return 0
 
 
-def get_lumi_price_usd():
-    series = get_lumi_series()
+def get_lumi_price_usd(series = get_lumi_series()):
     if(not series):
         return 0
 
@@ -35,8 +34,7 @@ def get_lumi_price_usd():
         return 0
 
 
-def get_lumi_price():
-    lumi_usd = get_lumi_price_usd()
+def get_lumi_price(lumi_usd = get_lumi_price_usd()):
     if(not lumi_usd):
         return "error"
 

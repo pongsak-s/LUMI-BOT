@@ -1,7 +1,6 @@
 import plotly.graph_objects as go
 from plotly import io
 from lumi import get_lumi_series
-import kaleido
 
 import pandas as pd
 from datetime import datetime
@@ -12,8 +11,7 @@ def convert(t):
     tz = pytz.timezone('Asia/Bangkok')
     return datetime.fromtimestamp(t, tz)
 
-def plot():
-    data = get_lumi_series()
+def plot(data = get_lumi_series()):
     if not data:
     	return 0
     df = pd.DataFrame(data)
