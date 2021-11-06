@@ -24,23 +24,27 @@ def get_lumi_series():
         return 0
 
 
-def get_lumi_price():
+def get_lumi_price_usd():
     series = get_lumi_series()
     if(not series):
+        return 0
+
+    try:
+        return float(series['c'][-1])
+    except:
+        return 0
+
+
+def get_lumi_price():
+    lumi_usd = get_lumi_price_usd()
+    if(not lumi_usd):
         return "error"
 
     try:
-        data = series
-        tz = pytz.timezone('Asia/Bangkok')
-        format_time = datetime.fromtimestamp(data['t'][-1], tz)
-        format_result = "{:.4f} {} at {}".format(data['c'][-1], CONST_CURRENCY, format_time)
+        format_result = "Current Price: {:.4f} {} ".format(lumi_usd, CONST_CURRENCY)
         return format_result
-    except requests.exceptions.Timeout:
+    except:
         return "no data"
-    except requests.exceptions.TooManyRedirects:
-        return "no data"
-    except requests.exceptions.RequestException as e:
-        return "error"
 
 
 if __name__ == "__main__":
