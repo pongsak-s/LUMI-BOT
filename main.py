@@ -26,7 +26,7 @@ async def on_message(message):
         lumi_series = get_lumi_series()
         lumi_usd = get_lumi_price_usd(lumi_series)
         await message.channel.send(get_lumi_price(lumi_usd))
-        lumi_thb="{:.2f}".format(lumi_usd*get_usdthb())
+        lumi_thb="{:.2f}".format(lumi_usd* get_usdthb())
         await message.channel.send("ราคาไทย: "+lumi_thb+" บาท")
         await message.channel.send("one sec. we are fectching the chart ......")
         png_base64 = base64.b64encode(plot(lumi_series)).decode('ascii')

@@ -6,6 +6,7 @@ from datetime import date, timedelta
 
 CONST_CURRENCY = 'USD'
 CONST_CLIENTID = os.getenv('CLIENTID')
+_exchange_rate = 33.35
 
 def get_yesterday():
     return (date.today() - timedelta(days=1)).strftime("%G-%m-%d")
@@ -33,9 +34,11 @@ def get_usdthb():
         return 0
 
     try:
-        return float(raw['result']['data']['data_detail'][0]['mid_rate'])
+        new_rate = float(raw['result']['data']['data_detail'][0]['mid_rate'])
+
+        return new_rate
     except:
-        return 0
+        return 33.35
 
 
 if __name__ == "__main__":
