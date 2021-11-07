@@ -8,7 +8,6 @@ from exchange import get_usdthb
 
 client = discord.Client()
 
-
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
@@ -33,5 +32,9 @@ async def on_message(message):
         file = discord.File(io.BytesIO(base64.b64decode(png_base64)), filename="image.png")
         await message.channel.send(file=file)
 
+    if message.content.startswith('$test'):
+        print(read_file())
+        write_file(33.31)
+        await message.channel.send(get_lumi_price())
 
 client.run(os.getenv('TOKEN'))

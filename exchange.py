@@ -6,7 +6,16 @@ from datetime import date, timedelta
 
 CONST_CURRENCY = 'USD'
 CONST_CLIENTID = os.getenv('CLIENTID')
-_exchange_rate = 33.35
+
+
+def write_file(value):
+    with open('out_rate', 'w') as output:
+        output.write(str(value))
+
+def read_file():
+    with open('out_rate') as f:
+        lines = f.readlines()
+    return float(lines[0])
 
 def get_yesterday():
     return (date.today() - timedelta(days=1)).strftime("%G-%m-%d")
@@ -35,10 +44,10 @@ def get_usdthb():
 
     try:
         new_rate = float(raw['result']['data']['data_detail'][0]['mid_rate'])
-
+        write_file(new_rate)
         return new_rate
     except:
-        return 33.35
+        return read_file()
 
 
 if __name__ == "__main__":
