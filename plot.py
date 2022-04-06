@@ -1,4 +1,5 @@
 import plotly.graph_objects as go
+import np
 from plotly import io
 from lumi import get_lumi_series
 
@@ -15,6 +16,11 @@ def plot(data = get_lumi_series()):
     if not data:
     	return 0
     df = pd.DataFrame(data)
+    df.drop('v', inplace=True, axis=1)
+    df.drop('s', inplace=True, axis=1)
+    df = df.astype({'t':'float','o':'float','h':'float','l':'float','c':'float'})
+    #print(df.tail().to_string())
+    #print( (df[~df.applymap(np.isreal).all(1)]).tail().to_string() )
     df['time'] = df.apply(lambda row: convert(row['t']), axis=1)
     fig = go.Figure(data=[go.Candlestick(x=df['time'],
                 open=df['o'],

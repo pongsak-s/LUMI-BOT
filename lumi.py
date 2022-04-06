@@ -10,6 +10,7 @@ CONST_CURRENCY = 'USD'
 
 def get_lumi_series():
     url = 'https://api.bkc.loremboard.finance/charts/history?symbol=LUMI&resolution=5&to='+str(int(time.time()))+'&countback=2&currencyCode='+CONST_CURRENCY
+    #print(url)
     response = requests.get(url,
                             headers={'Cache-Control': 'no-cache'})
 
