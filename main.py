@@ -6,7 +6,9 @@ import base64
 import io
 from exchange import get_usdthb
 
-client = discord.Client()
+
+intents = discord.Intents.default()
+client = discord.Client(intents=intents)
 
 @client.event
 async def on_ready():
